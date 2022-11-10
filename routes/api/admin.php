@@ -7,16 +7,13 @@ use App\Http\Controllers\API\Admin\AuthController;
 use App\Http\Controllers\API\Admin\CategoryController;
 use App\Http\Controllers\API\Admin\BrandController;
 use App\Http\Controllers\API\Admin\ProductController;
-// use App\Http\Controllers\API\PermissionController;
-// use App\Http\Controllers\API\RoleController;
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+use App\Http\Controllers\API\PermissionController;
+use App\Http\Controllers\API\RoleController;
 
 Route::post('admin/register',[AuthController::class, 'register'])->name('register');
 Route::post('admin/login',[AuthController::class, 'login'])->name('login');
-Route::group( ['prefix' => 'admin','middleware' => ['auth:admin-api','scopes:admin'] ],function(){
+// Route::group( ['prefix' => 'admin','middleware' => ['auth:admin-api','scopes:admin'] ],function(){
+    Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
    // authenticated staff routes here 
     Route::get('user', [UserController::class, 'index']);
     Route::get('users',[AuthController::class, 'index']);
@@ -25,8 +22,9 @@ Route::group( ['prefix' => 'admin','middleware' => ['auth:admin-api','scopes:adm
     Route::post('create-product', [ProductController::class, 'store']);
     Route::get('get-all-products', [ProductController::class, 'index']);
 
-    // Route::get('get-permissions', [PermissionController::class, 'index']);
-    // Route::post('create-permission', [PermissionController::class, 'store']);
+    Route::get('get-permissions', [PermissionController::class, 'index']);
+    Route::get('admin/get-permission/{id}', [PermissionController::class, 'show']);
+    Route::post('create-permission', [PermissionController::class, 'store']);
     
     // Route::resource('roles', RoleController::class);
 });

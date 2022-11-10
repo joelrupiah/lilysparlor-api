@@ -41,12 +41,12 @@ return [
             'provider' => 'users',
         ],
 
-        'user' => [
+        'api' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
-        'user-api' => [
+        'api' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],
@@ -119,7 +119,7 @@ return [
             'throttle' => 60,
         ],
 
-        'users' => [
+        'admins' => [
             'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
