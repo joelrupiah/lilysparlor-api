@@ -9,7 +9,7 @@ use Validator;
 
 class PermissionController extends Controller
 {
-   
+
     public function __construct(Permission $permission)
     {
         $this->permission = $permission;
@@ -36,7 +36,6 @@ class PermissionController extends Controller
         }
 
         $this->permission->create([
-            'guard_name' => 'doctor',
             'name' => $request->name
         ]);
 
@@ -46,7 +45,7 @@ class PermissionController extends Controller
 
     public function show($id)
     {
-        
+
     }
 
     public function update(Request $request, $id)

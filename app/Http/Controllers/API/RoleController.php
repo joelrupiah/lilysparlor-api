@@ -15,7 +15,7 @@ class RoleController extends Controller
         $this->role = $role;
         // $this->middleware('auth:admin-api');
     }
-   
+
     public function index()
     {
         $roles = Role::with('permissions')->get();
@@ -39,7 +39,6 @@ class RoleController extends Controller
         }
 
         $role = Role::create([
-            'guard_name' => 'doctor',
             'name' => $request->name
         ]);
 
@@ -47,7 +46,7 @@ class RoleController extends Controller
             $role->givePermissionTo($request->permissions);
         }
 
-        return response()->json('Role created', 200);
+        return response()->json('Role created', 201);
 
     }
 
