@@ -19,4 +19,8 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getImageAttribute($value){
+        return 'http://127.0.0.1:8000/uploads/images/category/'.$value;
+    }
 }
