@@ -49,7 +49,12 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        //
+        // return $id;
+        $category = Category::where('id', $id)->first();
+
+        return response()->json([
+          'category' => $category
+        ], 200);
     }
 
     public function update(Request $request, $id)

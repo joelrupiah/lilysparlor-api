@@ -36,6 +36,7 @@ Route::post('admin/create-role', [RoleController::class, 'store']);
 // Category Routes
     Route::post('create-category', [CategoryController::class, 'store']);
     Route::get('get-categories', [CategoryController::class, 'index']);
+    Route::get('get-single-category/{id}', [CategoryController::class, 'show']);
 
 
 // Brand Routes
