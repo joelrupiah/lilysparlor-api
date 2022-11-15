@@ -98,8 +98,6 @@ class CategoryController extends Controller
         }
         $category->delete();
 
-        return response()->json([
-            'category' => $category
-        ], 200);
+        return response()->json('success', 200);
     }
 }
