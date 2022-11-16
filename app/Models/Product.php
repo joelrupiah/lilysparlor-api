@@ -15,6 +15,7 @@ class Product extends Model
         'productcls_id',
         'name',
         'slug',
+        'sku',
         'price',
         'description',
         'mainDescription',
@@ -31,6 +32,15 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function productcls()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function getImageAttribute($value){
+        return 'http://127.0.0.1:8000/uploads/images/category/'.$value;
     }
 
 }

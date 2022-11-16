@@ -48,6 +48,13 @@ Route::post('admin/create-role', [RoleController::class, 'store']);
     Route::post('edit-class/{id}', [ProductClassController::class, 'update']);
     Route::delete('delete-class/{id}', [ProductClassController::class, 'destroy']);
 
+ // Product Routes
+ Route::post('create-product', [ProductController::class, 'store']);
+ Route::get('get-products', [ProductController::class, 'index']);
+ Route::get('get-single-product/{id}', [ProductController::class, 'show']);
+ Route::post('edit-product/{id}', [ProductController::class, 'update']);
+ Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
+
 // Brand Routes
     Route::post('create-brand', [BrandController::class, 'store']);
 
