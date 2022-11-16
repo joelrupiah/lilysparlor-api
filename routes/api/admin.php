@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Admin\AdminController;
 use App\Http\Controllers\API\Admin\AuthController;
 use App\Http\Controllers\API\Admin\Category\CategoryController;
+use App\Http\Controllers\API\Admin\ProductClass\ProductClassController;
 use App\Http\Controllers\API\Admin\Brand\BrandController;
 use App\Http\Controllers\API\Admin\Product\ProductController;
 use App\Http\Controllers\API\PermissionController;
@@ -40,6 +41,12 @@ Route::post('admin/create-role', [RoleController::class, 'store']);
     Route::post('edit-category/{id}', [CategoryController::class, 'update']);
     Route::delete('delete-category/{id}', [CategoryController::class, 'destroy']);
 
+    // Product Class Routes
+    Route::post('create-class', [ProductClassController::class, 'store']);
+    Route::get('get-classes', [ProductClassController::class, 'index']);
+    Route::get('get-single-class/{id}', [ProductClassController::class, 'show']);
+    Route::post('edit-class/{id}', [ProductClassController::class, 'update']);
+    Route::delete('delete-class/{id}', [ProductClassController::class, 'destroy']);
 
 // Brand Routes
     Route::post('create-brand', [BrandController::class, 'store']);

@@ -17,9 +17,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('productcls_id')->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->string('image')->nullable();
+            $table->string('price');
+            $table->text('description');
+            $table->longText('mainDescription');
+            $table->string('imageOne')->nullable();
+            $table->string('imageTwo')->nullable();
+            $table->string('imageThree')->nullable();
             $table->timestamps();
         });
     }
