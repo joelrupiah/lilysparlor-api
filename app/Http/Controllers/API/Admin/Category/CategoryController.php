@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        // return $id;
+
         $category = Category::where('id', $id)->first();
 
         return response()->json([
@@ -59,10 +59,8 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        return $request;
-        $category = Category::find($request->id);
 
-        // return $category
+        $category = Category::find($request->id);
 
         $image = $category->image;
         $category->name = $request->name;
@@ -88,9 +86,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        // return $id;
+
         $category = Category::find($id);
-        // return $category->image;
+
         $image = $category->image;
         $imagePath = public_path('/uploads/images/category/').$image;
         if (file_exists($imagePath)) {
