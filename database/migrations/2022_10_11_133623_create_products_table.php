@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('productcls_id')->nullable();
             $table->string('name');
             $table->string('slug');
+            $table->string('sku');
             $table->string('price');
             $table->text('description');
             $table->longText('mainDescription');

@@ -22,10 +22,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        // return $request;
+
         $request->validate([
             'category_id' => 'required',
-            'brand_id' => 'required',
-            'productcls_id' => 'required',
+            'brand_id' => 'nullable',
+            'productcls_id' => 'nullable',
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
@@ -53,7 +55,7 @@ class ProductController extends Controller
 
         $file_three_name = \Str::random(10) . '.' . $file_three_ex;
 
-        $prefix = 'LLP';
+        $prefix = 'LLP - ';
 
         $slug = slugify($request->name);
 
@@ -85,7 +87,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        $product = Product::where('id', $id)->first();
+        $product = Product::where('id', $id)->with('category')->first();
 
         return response()->json([
           'product' => $product
