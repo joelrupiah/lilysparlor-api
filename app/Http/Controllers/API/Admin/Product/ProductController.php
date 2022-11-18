@@ -19,6 +19,15 @@ class ProductController extends Controller
       ], 200);
     }
 
+    public function userIndex()
+    {
+        $products =  Product::get();
+
+      return response()->json([
+        'products' => $products
+      ], 200);
+    }
+
     public function store(Request $request)
     {
 

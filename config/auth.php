@@ -41,12 +41,12 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
+        'user' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
-        'api' => [
+        'user-api' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],

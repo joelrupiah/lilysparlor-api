@@ -19,6 +19,15 @@ class CategoryController extends Controller
       ], 200);
     }
 
+    public function userIndex()
+    {
+$categories = Category::get();
+
+return response()->json([
+    'categories' => $categories
+], 200);
+    }
+
     public function store(Request $request)
     {
 
