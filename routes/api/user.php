@@ -15,6 +15,8 @@ Route::group( ['middleware' => ['auth:user','scopes:user'] ],function(){
     Route::get('user', [UserController::class, 'index']);
     Route::get('users',[AuthController::class, 'index']);
 
+    Route::post('add-to-cart', [CartController::class, 'store']);
+
 });
 
 Route::get('get-categories', [CategoryController::class, 'userIndex']);
