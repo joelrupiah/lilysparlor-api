@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Admin\Category\CategoryController;
 use App\Http\Controllers\API\Admin\ProductClass\ProductClassController;
 use App\Http\Controllers\API\Admin\Brand\BrandController;
 use App\Http\Controllers\API\Admin\Product\ProductController;
+use App\Http\Controllers\API\Admin\Service\ServiceController;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 
@@ -54,6 +55,13 @@ Route::post('admin/create-role', [RoleController::class, 'store']);
  Route::get('get-single-product/{id}', [ProductController::class, 'show']);
  Route::post('edit-product/{id}', [ProductController::class, 'update']);
  Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
+
+ // Service Routes
+ Route::post('create-service', [ServiceController::class, 'store']);
+ Route::get('get-services', [ServiceController::class, 'index']);
+ Route::get('get-single-service/{id}', [ServiceController::class, 'show']);
+ Route::post('edit-service/{id}', [ServiceController::class, 'update']);
+ Route::delete('delete-service/{id}', [ServiceController::class, 'destroy']);
 
 // Brand Routes
     Route::post('create-brand', [BrandController::class, 'store']);
