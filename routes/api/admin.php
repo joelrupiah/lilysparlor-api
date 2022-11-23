@@ -15,7 +15,7 @@ use App\Http\Controllers\API\RoleController;
 Route::post('admin/register',[AuthController::class, 'register'])->name('register');
 Route::post('admin/login',[AuthController::class, 'login'])->name('login');
 
-    Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
 
 
 // Permission Routes

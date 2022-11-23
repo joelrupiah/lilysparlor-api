@@ -49,18 +49,34 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()->all()]);
         }
 
-        if(auth()->guard('user')->attempt(['email' => request('email'), 'password' => request('password')])){
+        $user = User::where('email', $request->email)->first();
 
-            config(['auth.guards.api.provider' => 'user']);
-
-            $user = User::select('users.*')->find(auth()->guard('user')->user()->id);
-            $success =  $user;
-            $success['token'] =  $user->createToken('UserToken',['user'])->accessToken;
-
-            return response()->json($success, 200);
-        }else{
-            return response()->json(['error' => ['Email and Password are Wrong.']], 401);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect']
+            ]);
+            
         }
+
+        $success =  $user;
+        $success['token'] =  $user->createToken('UserToken',['user'])->accessToken;
+
+        return response()->json($success, 200);
+
+        // return $user->createToken('User Token', ['user'])->accessToken;
+
+        // if(auth()->guard('user')->attempt(['email' => request('email'), 'password' => request('password')])){
+
+        //     config(['auth.guards.api.provider' => 'user']);
+
+        //     $user = User::select('users.*')->find(auth()->guard('user')->user()->id);
+        //     $success =  $user;
+        //     $success['token'] =  $user->createToken('UserToken',['user'])->accessToken;
+
+        //     return response()->json($success, 200);
+        // }else{
+        //     return response()->json(['error' => ['Email and Password are Wrong.']], 401);
+        // }
     }
 
     public function store(Request $request)
