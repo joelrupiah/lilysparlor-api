@@ -11,7 +11,7 @@ use Auth;
 
 class AuthController extends Controller
 {
-    
+
     public function index()
     {
         //
@@ -52,13 +52,13 @@ class AuthController extends Controller
         if(auth()->guard('user')->attempt(['email' => request('email'), 'password' => request('password')])){
 
             config(['auth.guards.api.provider' => 'user']);
-            
+
             $user = User::select('users.*')->find(auth()->guard('user')->user()->id);
             $success =  $user;
-            $success['token'] =  $user->createToken('UserToken',['user'])->accessToken; 
+            $success['token'] =  $user->createToken('UserToken',['user'])->accessToken;
 
             return response()->json($success, 200);
-        }else{ 
+        }else{
             return response()->json(['error' => ['Email and Password are Wrong.']], 401);
         }
     }

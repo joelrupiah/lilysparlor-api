@@ -11,7 +11,7 @@ use Auth;
 
 class CartController extends Controller
 {
-    
+
     public function index()
     {
         $user = Auth::user()->id;
@@ -38,7 +38,7 @@ class CartController extends Controller
             $item->increament('quantity');
             $item = $item->first();
         }
-        else 
+        else
         {
             $item = Cart::forceCreate([
                 'user_id' => $user,

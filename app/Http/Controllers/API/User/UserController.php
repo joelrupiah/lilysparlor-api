@@ -9,7 +9,7 @@ use Auth;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
         return Auth::user();

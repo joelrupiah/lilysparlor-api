@@ -12,7 +12,7 @@ use App\Http\Controllers\API\User\CartController;
 Route::post('register',[AuthController::class, 'register'])->name('register');
 Route::post('login',[AuthController::class, 'login'])->name('login');
 
-Route::group( ['middleware' => ['auth:user','scope:user'] ],function(){
+Route::group( ['middleware' => ['auth:user'] ],function(){
    // authenticated staff routes here
     Route::get('auth-user', [UserController::class, 'index']);
     Route::get('users',[AuthController::class, 'index']);
