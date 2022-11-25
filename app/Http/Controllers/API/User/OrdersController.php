@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Storage;
 class OrdersController extends Controller
 {
 
-    public function index()
+    public function showUserOrders()
     {
-        //
+        $user = Auth::user()->id;
+        $orders = Order::where('user_id', $user)
+                    ->orderBy('updated_at', 'Desc')
+                    ->get();
+        // return $orders->order_id;
+        return response()->json([
+            'orders' => $orders
+        ], 200);
     }
 
     public function store(Request $request)

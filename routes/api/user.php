@@ -25,6 +25,10 @@ Route::middleware(['auth:api', 'scope:user'])->group(function () {
 
     Route::post('checkout', [OrdersController::class, 'store']);
 
+    Route::get('user-order', [OrdersController::class, 'showUserOrders']);
+
+    Route::get('download-pdf/{order_id}', [OrdersController::class, 'downloadPdf']);
+
 });
 
 Route::get('get-categories', [CategoryController::class, 'userIndex']);
