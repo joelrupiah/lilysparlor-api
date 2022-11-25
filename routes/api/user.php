@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Admin\Category\CategoryController;
 use App\Http\Controllers\API\Admin\Product\ProductController;
 use App\Http\Controllers\API\Admin\Service\ServiceController;
 use App\Http\Controllers\API\User\CartController;
+use App\Http\Controllers\API\User\OrdersController;
 
 Route::post('register',[AuthController::class, 'register'])->name('register');
 Route::post('login',[AuthController::class, 'login'])->name('login');
@@ -19,6 +20,10 @@ Route::middleware(['auth:api', 'scope:user'])->group(function () {
 
     Route::post('add-to-cart', [CartController::class, 'store']);
     Route::get('cart-items', [CartController::class, 'index']);
+    Route::delete('delete-cart-item/{id}', [CartController::class, 'destroy']);
+    Route::delete('delete-all-cart-items', [CartController::class, 'destroyAll']);
+
+    Route::post('checkout', [OrdersController::class, 'store']);
 
 });
 

@@ -54,7 +54,7 @@ class CartController extends Controller
             'quantity' => $item->quantity,
             'product' => $item->product,
             'amount' => $item->amount
-        ], 200);
+        ], 201);
     }
 
     public function show($id)
