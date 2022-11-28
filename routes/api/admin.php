@@ -11,12 +11,15 @@ use App\Http\Controllers\API\Admin\Product\ProductController;
 use App\Http\Controllers\API\Admin\Service\ServiceController;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\Admin\Order\OrdersController;
 
 Route::post('admin/register',[AuthController::class, 'register'])->name('register');
 Route::post('admin/login',[AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
 
+// Admins Routes
+Route::get('get-all-admins', [AdminController::class, 'index']);
 
 // Permission Routes
 Route::get('get-permissions', [PermissionController::class, 'index']);
@@ -70,5 +73,10 @@ Route::post('admin/create-role', [RoleController::class, 'store']);
 // Product Routes
     Route::post('create-product', [ProductController::class, 'store']);
     Route::get('get-all-products', [ProductController::class, 'index']);
+
+    // Order Routes
+    Route::get('all-user-order', [OrdersController::class, 'index']);
+    // Route::get('order-details/{order_id}', [OrdersController::class, 'orderDetail']);
+    Route::get('get-user-specific-order/{order_id}', [OrdersController::class, 'getUserSpecificOrder']);
 
 });

@@ -11,7 +11,11 @@ class AdminController extends Controller
    
     public function index()
     {
-        //
+        $admins = Admin::get();
+
+        return response()->json([
+            'admins' => $admins
+        ], 200);
     }
 
     public function store(Request $request)
