@@ -15,12 +15,20 @@ class Service extends Model
       'price',
       'description',
       'mainDescription',
-      'imageOne',
-      'imageTwo',
-      'imageThree'
+      'image_one',
+      'image_two',
+      'image_three'
     ];
 
-    public function getImageAttribute($value){
+    public function getImageOneAttribute($value){
         return 'http://127.0.0.1:8000/uploads/images/service/'.$value;
     }
+
+    public function getImageTwoAttribute($value){
+      return 'http://127.0.0.1:8000/uploads/images/service/'.$value;
+  }
+
+  public function getImageThreeAttribute($value){
+    return 'http://127.0.0.1:8000/uploads/images/service/'.$value;
+}
 }

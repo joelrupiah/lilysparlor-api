@@ -16,18 +16,14 @@ return new class extends Migration
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('service_id');
             $table->string('firstName');
             $table->string('lastName');
             $table->string('email');
-            $table->string('country');
-            $table->string('county');
-            $table->string('postCode');
             $table->string('phone');
             $table->string('description');
-            $table->string('expected_date')->nullable();
-            $table->string('booking_date')->nullable();
+            $table->date('expected_date')->nullable();
+            $table->time('expected_time')->nullable();
             $table->timestamps();
         });
     }

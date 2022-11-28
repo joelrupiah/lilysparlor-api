@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
             $table->longText('shipping');
-            $table->longText('product')->nullable();
             $table->longText('service')->nullable();
             $table->string('total');
             $table->string('payment');

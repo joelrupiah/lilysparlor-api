@@ -13,18 +13,15 @@ class ShippingAddress extends Model
         'firstName',
         'lastName',
         'email',
-        'country',
-        'county',
-        'postCode',
         'phone',
         'description',
         'expected_date',
-        'booking_date'
+        'expected_time',
     ];
 
     protected $casts = [
         'expected_date' => 'datetime',
-        'booking_date' => 'datetime'
+        'expected_time' => 'datetime',
     ];
 
     public function Order()

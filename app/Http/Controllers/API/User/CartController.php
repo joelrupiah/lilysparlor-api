@@ -17,7 +17,7 @@ class CartController extends Controller
         $user = Auth::user()->id;
         $carts = Cart::where('user_id', $user)
             ->orderBy('created_at', 'DESC')
-            ->with('product')
+            ->with('service')
             ->get();
 
         return response()->json([
@@ -29,21 +29,21 @@ class CartController extends Controller
     {
         $user = Auth::user()->id;
 
-        $product = $request->product['id'];
-        $amount = $request->product['price'];
-        $item = Cart::where('product_id', $product);
+        $service = $request->service['id'];
+        $amount = $request->service['price'];
+        $item = Cart::where('service_id', $service);
 
         if($item->count())
         {
-            $item->increament('quantity');
+            $item->increment('quantity');
             $item = $item->first();
         }
         else
         {
             $item = Cart::forceCreate([
                 'user_id' => $user,
-                'product_id' => $product,
-                'service_id' => $product,
+                // 'product_id' => $service,
+                'service_id' => $service,
                 'quantity' => 1,
                 'amount' => $amount
             ]);
@@ -52,7 +52,8 @@ class CartController extends Controller
         return response()->json([
             'user' => $item->user,
             'quantity' => $item->quantity,
-            'product' => $item->product,
+            'service' => $item->service,
+            // 'product' => $item->product,
             'amount' => $item->amount
         ], 201);
     }
@@ -69,7 +70,7 @@ class CartController extends Controller
 
     public function destroy($id)
     {
-        $item = Cart::where('product_id', $id)->delete();
+        $item = Cart::where('service_id', $id)->delete();
         return response('success', 200);
     }
 

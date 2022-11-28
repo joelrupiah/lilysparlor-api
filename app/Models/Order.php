@@ -18,11 +18,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function setProductAttribute($value)
+    public function setServiceAttribute($value)
     {
-        $this->attributes['product'] = serialize($value);
+        $this->attributes['service'] = serialize($value);
     }
-    public function getProductAttribute($value)
+    public function getServiceAttribute($value)
     {
         return unserialize($value);
     }

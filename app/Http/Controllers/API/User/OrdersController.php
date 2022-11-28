@@ -30,7 +30,7 @@ class OrdersController extends Controller
     {
         // return $request;
         $user = Auth::user()->id;
-        $product = $request->cart;
+        $service = $request->cart;
         $shipping = $request->form;
         // return $product;
         // return $shipping;
@@ -38,12 +38,12 @@ class OrdersController extends Controller
         $total = $request->total;
         if ($request->payment['cash_on_delivery']) {
 
-            $products = Cart::where('user_id', $user)->get();
+            $services = Cart::where('user_id', $user)->get();
 
             // $productSave = serialize($product);
 
             Order::create([
-                'product' => $product,
+                'service' => $service,
                 'shipping' => $shipping,
                 'user_id' => $user,
                 'order_id' => $order_id,
