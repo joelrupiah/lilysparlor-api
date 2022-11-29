@@ -17,11 +17,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('admin_id')->nullable();
             $table->longText('shipping');
             $table->longText('service')->nullable();
             $table->string('total');
             $table->string('payment');
             $table->string('status')->default('pending');
+            $table->string('image_one')->nullable();
+            $table->string('image_two')->nullable();
+            $table->string('image_three')->nullable();
             $table->timestamps();
         });
     }

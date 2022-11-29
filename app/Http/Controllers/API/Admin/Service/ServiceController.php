@@ -38,24 +38,24 @@ class ServiceController extends Controller
           'price' => 'required',
           'description' => 'required',
           'mainDescription' => 'required',
-          'imageOne' => 'required',
-          'imageTwo' => 'required',
-          'imageThree' => 'required',
+          'image_one' => 'required',
+          'image_two' => 'required',
+          'image_three' => 'required',
       ]);
 
-      $fileOne = explode(';', $request->imageOne);
+      $fileOne = explode(';', $request->image_one);
       $fileOne = explode('/', $fileOne[0]);
       $file_one_ex = end($fileOne);
 
       $file_one_name = \Str::random(10) . '.' . $file_one_ex;
 
-      $fileTwo = explode(';', $request->imageTwo);
+      $fileTwo = explode(';', $request->imag_two);
       $fileTwo = explode('/', $fileTwo[0]);
       $file_two_ex = end($fileTwo);
 
       $file_two_name = \Str::random(10) . '.' . $file_two_ex;
 
-      $fileThree = explode(';', $request->imageThree);
+      $fileThree = explode(';', $request->image_three);
       $fileThree = explode('/', $fileThree[0]);
       $file_three_ex = end($fileThree);
 
@@ -63,20 +63,20 @@ class ServiceController extends Controller
 
       $slug = slugify($request->name);
 
-      Service::create([
+      Service::update([
           'name' => $request->name,
           'slug' => $slug,
           'price' => $request->price,
           'description' => $request->description,
           'mainDescription' => $request->mainDescription,
-          'imageOne' => $file_one_name,
-          'imageTwo' => $file_two_name,
-          'imageThree' => $file_three_name
+          'image_one' => $file_one_name,
+          'image_two' => $file_two_name,
+          'image_three' => $file_three_name
       ]);
 
-      Image::make($request->imageOne)->save(public_path('/uploads/images/service/').$file_one_name);
-      Image::make($request->imageTwo)->save(public_path('/uploads/images/service/').$file_two_name);
-      Image::make($request->imageThree)->save(public_path('/uploads/images/service/').$file_three_name);
+      Image::make($request->image_one)->save(public_path('/uploads/images/service/').$file_one_name);
+      Image::make($request->image_two)->save(public_path('/uploads/images/service/').$file_two_name);
+      Image::make($request->image_three)->save(public_path('/uploads/images/service/').$file_three_name);
 
       return response()->json('success', 201);
 
@@ -97,55 +97,55 @@ class ServiceController extends Controller
 
       $service = Service::find($request->id);
 
-      $imageOne = $service->imageOne;
-      $imageTwo = $service->imageTwo;
-      $imageThree = $service->imageThree;
+      $image_one = $service->image_one;
+      $image_two = $service->image_two;
+      $image_three = $service->image_three;
 
       $service->name = $request->name;
       $service->price = $request->price;
       $service->description = $request->description;
       $service->mainDescription = $request->mainDescription;
 
-      $imageOnePath = public_path('/uploads/images/service/').$imageOne;
+      $imageOnePath = public_path('/uploads/images/service/').$image_one;
       if (file_exists($imageOnePath)) {
           unlink($imageOnePath);
       }
 
-      if ($request->imageOne != $service->imageOne) {
-          $fileOne = explode(';', $request->imageOne);
+      if ($request->image_one != $service->image_one) {
+          $fileOne = explode(';', $request->image_one);
           $fileOne = explode('/', $fileOne[0]);
           $file_one_ex = end($fileOne);
           $file_one_name = \Str::random(10) . '.' . $file_one_ex;
-          $service->imageOne = $file_one_name;
-          Image::make($request->imageOne)->save(public_path('/uploads/images/service/').$file_one_name);
+          $service->image_one = $file_one_name;
+          Image::make($request->image_one)->save(public_path('/uploads/images/service/').$file_one_name);
       }
 
-      $imageTwoPath = public_path('/uploads/images/service/').$imageTwo;
+      $imageTwoPath = public_path('/uploads/images/service/').$image_two;
       if (file_exists($imageTwoPath)) {
           unlink($imageTwoPath);
       }
 
-      if ($request->imageTwo != $service->imageTwo) {
-          $fileTwo = explode(';', $request->imageTwo);
+      if ($request->image_two != $service->image_two) {
+          $fileTwo = explode(';', $request->image_two);
           $fileTwo = explode('/', $fileTwo[0]);
           $file_two_ex = end($fileTwo);
           $file_two_name = \Str::random(10) . '.' . $file_two_ex;
-          $service->imageTwo = $file_two_name;
-          Image::make($request->imageTwo)->save(public_path('/uploads/images/service/').$file_two_name);
+          $service->image_two = $file_two_name;
+          Image::make($request->image_two)->save(public_path('/uploads/images/service/').$file_two_name);
       }
 
-      $imageThreePath = public_path('/uploads/images/service/').$imageThree;
+      $imageThreePath = public_path('/uploads/images/service/').$image_three;
       if (file_exists($imageThreePath)) {
           unlink($imageThreePath);
       }
 
-      if ($request->imageThree != $service->imageThree) {
-          $fileThree = explode(';', $request->imageThree);
+      if ($request->image_three != $service->image_three) {
+          $fileThree = explode(';', $request->image_three);
           $fileThree = explode('/', $fileThree[0]);
           $file_three_ex = end($fileThree);
           $file_three_name = \Str::random(10) . '.' . $file_three_ex;
-          $service->imageThree = $file_two_name;
-          Image::make($request->imageThree)->save(public_path('/uploads/images/service/').$file_three_name);
+          $service->image_three = $file_two_name;
+          Image::make($request->image_three)->save(public_path('/uploads/images/service/').$file_three_name);
       }
 
       $service->save();
@@ -158,21 +158,21 @@ class ServiceController extends Controller
 
       $service = Service::find($id);
 
-      $imageOne = $service->imageOne;
-      $imageTwo = $service->imageTwo;
-      $imageThree = $service->imageThree;
+      $image_one = $service->image_one;
+      $image_two = $service->image_two;
+      $image_three = $service->image_three;
 
-      $imageOnePath = public_path('/uploads/images/service/').$imageOne;
+      $imageOnePath = public_path('/uploads/images/service/').$image_one;
       if (file_exists($imageOnePath)) {
           unlink($imageOnePath);
       }
 
-      $imageTwoPath = public_path('/uploads/images/service/').$imageTwo;
+      $imageTwoPath = public_path('/uploads/images/service/').$image_two;
       if (file_exists($imageTwoPath)) {
           unlink($imageTwoPath);
       }
 
-      $imageThreePath = public_path('/uploads/images/service/').$imageThree;
+      $imageThreePath = public_path('/uploads/images/service/').$image_three;
       if (file_exists($imageThreePath)) {
           unlink($imageThreePath);
       }

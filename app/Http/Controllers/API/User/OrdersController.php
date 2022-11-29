@@ -70,7 +70,7 @@ class OrdersController extends Controller
         $order = Order::where('order_id', $order_id)
                 ->with('user')
                 ->first();
-        
+
         $data = [
             'order_name' => $order_id
         ];

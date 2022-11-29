@@ -18,6 +18,23 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
+    public function getImageOneAttribute($value){
+        return 'http://127.0.0.1:8000/uploads/images/order/'.$value;
+    }
+
+    public function getImageTwoAttribute($value){
+      return 'http://127.0.0.1:8000/uploads/images/order/'.$value;
+  }
+
+  public function getImageThreeAttribute($value){
+    return 'http://127.0.0.1:8000/uploads/images/order/'.$value;
+}
+
     public function setServiceAttribute($value)
     {
         $this->attributes['service'] = serialize($value);

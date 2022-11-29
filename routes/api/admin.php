@@ -18,6 +18,10 @@ Route::post('admin/login',[AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
 
+// Users Routes
+Route::get('get-all-users', [AdminController::class, 'getAllUsers']);
+Route::get('get-user-specific-history/{id}', [AdminController::class, 'showUserSpecificHistory']);
+
 // Admins Routes
 Route::get('get-all-admins', [AdminController::class, 'index']);
 
@@ -78,5 +82,7 @@ Route::post('admin/create-role', [RoleController::class, 'store']);
     Route::get('all-user-order', [OrdersController::class, 'index']);
     // Route::get('order-details/{order_id}', [OrdersController::class, 'orderDetail']);
     Route::get('get-user-specific-order/{order_id}', [OrdersController::class, 'getUserSpecificOrder']);
+
+    Route::post('update-booking/{order_id}', [OrdersController::class, 'updateBooking']);
 
 });
