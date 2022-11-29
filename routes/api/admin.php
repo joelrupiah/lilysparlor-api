@@ -18,6 +18,12 @@ Route::post('admin/login',[AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
 
+    // Admin Routes
+    Route::get('all-admins', [AdminController::class, 'getAllAdmins']);
+    Route::post('create-admin', [AdminController::class, 'createAdmin']);
+    Route::post('edit-admin/{id}', [AdminController::class, 'updateAdmin']);
+    Route::delete('delete-admin/{id}', [AdminController::class, 'destroyAdmin']);
+
 // Users Routes
 Route::get('get-all-users', [AdminController::class, 'getAllUsers']);
 Route::get('get-user-specific-history/{id}', [AdminController::class, 'showUserSpecificHistory']);
