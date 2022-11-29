@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Hash;
 use Auth;
+use Illuminate\Foundation\Validation\ValidationException;
 
 class AuthController extends Controller
 {

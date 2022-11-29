@@ -27,14 +27,14 @@ Route::get('get-all-admins', [AdminController::class, 'index']);
 
 // Permission Routes
 Route::get('get-permissions', [PermissionController::class, 'index']);
-Route::get('admin/get-permission/{id}', [PermissionController::class, 'show']);
+Route::get('get-permission/{id}', [PermissionController::class, 'show']);
 Route::post('create-permission', [PermissionController::class, 'store']);
 
 
 // Roles Routes
-Route::get('admin/get-roles', [RoleController::class, 'index']);
-Route::get('admin/get-role/{id}', [RoleController::class, 'show']);
-Route::post('admin/create-role', [RoleController::class, 'store']);
+Route::get('get-roles', [RoleController::class, 'index']);
+Route::get('get-role/{id}', [RoleController::class, 'show']);
+Route::post('create-role', [RoleController::class, 'store']);
 
 
 // Admin Data Routes
