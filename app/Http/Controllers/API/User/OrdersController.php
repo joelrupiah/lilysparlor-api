@@ -54,7 +54,7 @@ class OrdersController extends Controller
 
             $this->downloadPdf($order_id);
 
-            // Cart::where('user_id', $user)->delete();
+            Cart::where('user_id', $user)->delete();
 
             return response()->json('success', 200);
 
