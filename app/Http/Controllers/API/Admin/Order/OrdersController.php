@@ -36,6 +36,14 @@ class OrdersController extends Controller
     public function updateBooking(Request $request, Order $order)
     {
       // return $request->order_id;
+
+      $request->validate([
+        'admin_id' => 'required',
+        'image_one' => 'required',
+        'image_two' => 'required',
+        'image_three' => 'required',
+      ]);
+
       $order = Order::where('order_id', $request->order_id)->first();
       // return $order;
 

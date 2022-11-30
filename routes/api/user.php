@@ -13,6 +13,10 @@ use App\Http\Controllers\API\User\OrdersController;
 Route::post('register',[AuthController::class, 'register'])->name('register');
 Route::post('login',[AuthController::class, 'login'])->name('login');
 
+Route::post('send-token', [AuthController::class, 'sendToken']);
+Route::post('validate-token', [AuthController::class, 'validateToken']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
+
 Route::middleware(['auth:api', 'scope:user'])->group(function () {
    // authenticated staff routes here
     Route::get('auth-user', [UserController::class, 'index']);

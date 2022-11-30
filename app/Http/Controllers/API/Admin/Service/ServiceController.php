@@ -49,7 +49,7 @@ class ServiceController extends Controller
 
       $file_one_name = \Str::random(10) . '.' . $file_one_ex;
 
-      $fileTwo = explode(';', $request->imag_two);
+      $fileTwo = explode(';', $request->image_two);
       $fileTwo = explode('/', $fileTwo[0]);
       $file_two_ex = end($fileTwo);
 
@@ -63,7 +63,7 @@ class ServiceController extends Controller
 
       $slug = slugify($request->name);
 
-      Service::update([
+      Service::create([
           'name' => $request->name,
           'slug' => $slug,
           'price' => $request->price,
@@ -94,6 +94,16 @@ class ServiceController extends Controller
 
   public function update(Request $request, $id)
   {
+
+      // $request->validate([
+      //     'name' => 'required',
+      //     'price' => 'required',
+      //     'description' => 'required',
+      //     'mainDescription' => 'required',
+      //     'image_one' => 'required',
+      //     'image_two' => 'required',
+      //     'image_three' => 'required',
+      // ]);
 
       $service = Service::find($request->id);
 

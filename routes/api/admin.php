@@ -19,17 +19,17 @@ Route::post('admin/login',[AuthController::class, 'login'])->name('login');
 Route::middleware(['auth:admin-api', 'scope:admin'])->prefix('admin')->group(function () {
 
     // Admin Routes
-    Route::get('all-admins', [AdminController::class, 'getAllAdmins']);
-    Route::post('create-admin', [AdminController::class, 'createAdmin']);
-    Route::post('edit-admin/{id}', [AdminController::class, 'updateAdmin']);
-    Route::delete('delete-admin/{id}', [AdminController::class, 'destroyAdmin']);
+    Route::get('all-admins', [AdminController::class, 'index']);
+    Route::post('create-admin', [AdminController::class, 'store']);
+    Route::get('get-admin/{id}', [AdminController::class, 'show']);
+    Route::post('edit-admin/{id}', [AdminController::class, 'update']);
+    Route::delete('delete-admin/{id}', [AdminController::class, 'destroy']);
+
+    Route::get('get-all-admins', [AdminController::class, 'index']);
 
 // Users Routes
 Route::get('get-all-users', [AdminController::class, 'getAllUsers']);
 Route::get('get-user-specific-history/{id}', [AdminController::class, 'showUserSpecificHistory']);
-
-// Admins Routes
-Route::get('get-all-admins', [AdminController::class, 'index']);
 
 // Permission Routes
 Route::get('get-permissions', [PermissionController::class, 'index']);

@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PasswordReset;
 use Illuminate\Http\Request;
 use Validator;
 use Hash;
+use Mail;
 use Auth;
+use App\Mail\ResetPassword;
 use Illuminate\Foundation\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -20,15 +23,11 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'email' => 'required', 'email', 'unique:users',
+            'password' => 'required', 'min:6', 'confirmed'
         ]);
-
-        if($validator->fails()){
-            return response()->json(['error' => $validator->errors()->all()]);
-        }
 
         $userCreated = User::create([
             'name' => $request->name,
@@ -41,14 +40,10 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
+        $request->validate([
+            'email' => 'required', 'email', 'unique:users',
+            'password' => 'required', 'min:6', 'confirmed'
         ]);
-
-        if($validator->fails()){
-            return response()->json(['error' => $validator->errors()->all()]);
-        }
 
         $user = User::where('email', $request->email)->first();
 
@@ -56,7 +51,7 @@ class AuthController extends Controller
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect']
             ]);
-            
+
         }
 
         $success =  $user;
@@ -80,23 +75,50 @@ class AuthController extends Controller
         // }
     }
 
-    public function store(Request $request)
+    public function sendToken(Request $request)
     {
-        //
+        $user = User::where('email', $request->email)->first();
+
+        if (!isset($user->id)) {
+            return response()->json([
+                'error' => 'User with this email does not exist'
+            ], 401);
+        }
+
+        $token = \Str::random(5);
+        Mail::to($user)->send(new ResetPassword($token));
+
+        $passwordReset = new PasswordReset();
+        $passwordReset->email = $user->email;
+        $passwordReset->token = $token;
+
+        $passwordReset->save();
     }
 
-    public function show(User $user)
+    public function validateToken(Request $request)
     {
-        //
+        $passwordReset = PasswordReset::where('token', $request->token)->first();
+
+        if (!isset($passwordReset->email)) {
+            return response()->json([
+                'error' => 'Invalid Token'
+            ], 401);
+        }
+
+        $user = User::where('email', $passwordReset->email)->first();
+
+        return response()->json($user, 200);
     }
 
-    public function update(Request $request, User $user)
+    public function resetPassword(Request $request)
     {
-        //
+        $user = User::find($request->user_id);
+
+        $passwordReset = PasswordReset::where('email', $user->email)->first();
+        $passwordReset->delete();
+
+        $user->password = bcrypt($request->password);
+        $user->save();
     }
 
-    public function destroy(User $user)
-    {
-        //
-    }
 }
